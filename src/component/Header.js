@@ -267,6 +267,7 @@ const HeaderContainer = styled.header`
             color: #fff;
             font-weight: bold;
             margin-bottom: 10px;
+            text-shadow: none !important;
             &::before { display: none !important; }
           }
           
@@ -279,6 +280,8 @@ const HeaderContainer = styled.header`
               padding: 8px 0;
               font-size: 1em;
               color: rgba(255, 255, 255, 0.6) !important;
+              text-shadow: none !important;
+              &::before { display: none !important; }
             }
           }
         }
