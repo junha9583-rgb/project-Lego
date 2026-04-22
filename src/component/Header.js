@@ -256,7 +256,7 @@ const HeaderContainer = styled.header`
 
         > li {
           width: 100%;
-          &:nth-child(2) > a { color: #fff !important; }
+          &:nth-child(2) > a { color: #fff !important; text-shadow: none; }
 
           > a {
             display: block;
