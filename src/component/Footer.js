@@ -7,18 +7,19 @@ const size = {
 };
 
 const FooterContainer = styled.footer`
-  color: #999;
+  color: #ccc;
   font-size: 0.9em;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  
 
   .footer-inner {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 50px 20px;
-    background: none;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px 24px 0 0;
   }
 
   .footer-1 {
@@ -69,6 +70,7 @@ const FooterContainer = styled.footer`
   @media (max-width: ${size.tablet}) {
     .footer-inner {
       padding: 50px;
+      border-radius: 12px 12px 0 0;
     }
 
     .footer-3 {

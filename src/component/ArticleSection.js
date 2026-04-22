@@ -22,6 +22,14 @@ const SectionContainer = styled.section`
     position: relative;
   }
 
+  .cont-1-inner {
+    border-radius: 24px 24px 0 0;
+  }
+
+  .cont-1-inner .text-box h2 {
+    font-family: "Exo 2", sans-serif;
+  }
+
   article {
     height: 100%;
     position: relative;
@@ -59,12 +67,14 @@ const SectionContainer = styled.section`
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-shadow: 0 0 10px ${props => props.type === 'brand' ? 'rgba(185, 221, 26, 0.5)' : 'rgba(229, 9, 20, 0.5)'};
+      cursor:default;
     }
 
     h2 + p {
       font-size: 1.1em;
       line-height: 1.8;
       margin: 30px 0 70px 0;
+      cursor:default;
     }
 
     a {
@@ -125,23 +135,30 @@ const SectionContainer = styled.section`
 
   /* 태블릿 */
   @media (max-width: ${size.tablet}) {
-    .text-box {
-      top: 30%;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border-radius: 12px;
-      padding: 50px 30px;
-      margin: 0 10px;
-
-      h2 {
-        font-size: 3em;
-      }
-
-      h2 + p {
-        font-size: 0.9em;
-        margin: 30px 0;
-      }
+    .cont-1-inner {
+      border-radius: 12px 12px 0 0;
     }
+      .text-box {
+        top: 30%;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-radius: 12px;
+        padding: 50px 30px;
+        margin: 0 10px;
+
+        h2 {
+          font-size: 3em;
+        }
+
+        h2 + p {
+          font-size: 0.9em;
+          margin: 30px 0;
+        }
+
+        a {
+          font-size: 1.1em;
+        }
+      }
 
     .img-wrap {
       bottom: 130px;

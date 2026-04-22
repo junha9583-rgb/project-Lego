@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styled from 'styled-components';
+import { styled, keyframes } from 'styled-components';
 import { productConfig } from "../data";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -11,25 +11,59 @@ import 'swiper/css/pagination';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const size = {
+  mobile: '768px',
+  tablet: '1024px',
+};
+
+const neonFlicker = keyframes`
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.9),
+      0 0 10px var(--neon-color),
+      0 0 20px var(--neon-color),
+      0 0 40px var(--neon-color);
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    text-shadow: 
+      2px 2px 2px rgba(0, 0, 0, 0.8);
+    opacity: 0.3;
+  }
+`;
+
+const FlickerSpan = styled.span`
+  display: inline-block;
+  animation: ${neonFlicker} 2.5s linear infinite;
+  -webkit-text-stroke: inherit; 
+`;
+
 const SectionWrapper = styled.section`
   .cont-3-inner,
   .cont-4-inner {
     width: 100%;
     padding-bottom: 150px;
+    text-align: center;
+  }
+
+  .cont-4-inner {
+    border-radius: 0 0 24px 24px;
   }
 
   h2 {
     font-size: 4em;
     font-weight: 900;
-    color: transparent;
+    color: ${props => (props.type === 'best' ? '#FFF176' : '#69F0AE')};
     letter-spacing: 8px;
     text-align: center;
     margin-bottom: 100px;
-    -webkit-text-stroke: 2px #00E676;
-    
-    text-shadow: ${props => props.type === 'best'
-    ? `0 0 8px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.15)`
-    : `0 0 8px rgba(0, 163, 224, 0.6), 0 0 20px rgba(0, 163, 224, 0.3), 0 0 40px rgba(0, 163, 224, 0.15)`
+    -webkit-text-stroke: 1px ${props => (props.type === 'best' ? '#69F0AE' : '#FFF176')};
+    text-shadow:
+      2px 2px 3px rgba(0, 0, 0, 1),
+      0 0 5px #000,
+      ${props => props.type === 'best'
+    ? `0 0 10px rgba(255, 215, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 160, 0, 0.5), 0 0 40px rgba(255, 160, 0, 0.3)`
+    : `0 0 10px rgba(0, 230, 118, 0.9), 0 0 15px rgba(0, 230, 118, 0.7), 0 0 30px rgba(0, 105, 92, 0.5), 0 0 40px rgba(0, 105, 92, 0.3)`
   };
   }
 
@@ -86,6 +120,40 @@ const SectionWrapper = styled.section`
     margin-top: 20px;
     text-align: center;
   }
+
+  /* 태블릿 */
+  @media (max-width: ${size.tablet}) {
+    .cont-4-inner {
+      border-radius: 0 0 12px 12px;
+    }
+  }
+
+  /* 모바일 */
+  @media (max-width: ${size.mobile}) {
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 50px;
+    }
+
+    .swiper-slide {
+      padding: 30px 20px;
+      
+      .img-wrap {
+        width: 100%;
+        max-height: 250px;
+        margin: 0 auto;
+      }
+
+      .text-wrap {
+        h3 { font-size: 1.2em; }
+        .price { font-size: 1.1em; }
+      }
+    }
+    
+    .my-product-swiper {
+      padding: 0 10px !important;
+    }
+  }
 `;
 
 function ProductSection({ type, title }) {
@@ -136,7 +204,14 @@ function ProductSection({ type, title }) {
   return (
     <SectionWrapper type={type} className={current.sectionClass} ref={sectionRef}>
       <div className={current.innerClass}>
-        <h2 ref={titleRef}>{title}</h2>
+        <h2 ref={titleRef}>
+          {title.split("").map((char, index) => {
+            if (index === 2) {
+              return <FlickerSpan key={index}>{char}</FlickerSpan>;
+            }
+            return char;
+          })}
+        </h2>
 
         <div ref={swiperRef}>
           <Swiper
@@ -149,9 +224,9 @@ function ProductSection({ type, title }) {
             slidesPerGroup={2}
             spaceBetween={30}
             breakpoints={{
-              320: { slidesPerView: 2, spaceBetween: 15, slidesPerGroup: 1 },
-              780: { slidesPerView: 3, spaceBetween: 20, slidesPerGroup: 2 },
-              1280: { slidesPerView: 4, spaceBetween: 30, slidesPerGroup: 2 }
+              320: { slidesPerView: 1.1, spaceBetween: 15, slidesPerGroup: 1 },
+              780: { slidesPerView: 3, spaceBetween: 20, slidesPerGroup: 2, centeredSlides: false },
+              1280: { slidesPerView: 4, spaceBetween: 30, slidesPerGroup: 2, centeredSlides: false }
             }}
             slideToClickedSlide={true}
             centeredSlidesBounds={true}

@@ -10,20 +10,28 @@ const size = {
   tablet: '1024px',
 };
 
+const GnbLink = styled.a`
+  font-family: 'SandollSamlipHobbangBasic', sans-serif !important;
+  font-size: 25px;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: pixelated;
+`;
+
 const HeaderContainer = styled.header`
   position: sticky;
   z-index: 1000;
   top: 0;
   height: 92px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 
   .header-inner {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100%;
+    border-radius: 0 0 24px 24px;
   }
 
   h1 {
@@ -34,10 +42,6 @@ const HeaderContainer = styled.header`
     img {
       width: 70px;
       height: 70px;
-      transition: all 0.2s;
-    }
-    a:hover img {
-      transform: rotate(-5deg) translateY(1px);
     }
   }
 
@@ -77,13 +81,12 @@ const HeaderContainer = styled.header`
         position: relative;
         display: inline-block;
         padding: 10px 20px;
-        font-size: 1em;
-        font-weight: bold;
         border-radius: 4px;
         transition: all 0.2s;
         box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
         background-color: var(--point-color);
         color: #fff;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
 
         &::before {
           content: "";
@@ -98,7 +101,10 @@ const HeaderContainer = styled.header`
             var(--point-color) 65%, var(--point-color) 100%);
         }
       }
-      &:nth-child(2) > a { color: #000; }
+      &:nth-child(2) > a {
+        color: #000;
+        text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
@@ -117,7 +123,7 @@ const HeaderContainer = styled.header`
 
     li a {
       display: block;
-      padding: 12px 20px;
+      padding: 18px 20px;
       color: #fff !important;
       font-size: 0.85em;
       font-weight: normal;
@@ -140,30 +146,35 @@ const HeaderContainer = styled.header`
   .util {
     display: flex;
     justify-content: space-between;
-    gap: 5vw;
+    gap: 3vw;
 
     .search-box {
       display: flex;
       i {
-        font-size: 1.2em;
-        background-color: #999;
+        font-size: 1em;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
         color: #fff;
-        padding: 7px;
+        padding: 10px;
         border-right: 1px solid #000;
-        border-radius: 4px 0 0 4px;
+        border-radius: 20px 0 0 20px;
+        margin: auto;
       }
       input {
-        background-color: #999;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
         padding: 5px 10px;
-        border-radius: 0 4px 4px 0;
-        &::placeholder { color: #fff; }
+        border-radius: 0 20px 20px 0;
+        &::placeholder { color: rgba(255, 255, 255, 0.7); }
       }
     }
     .login-btn {
-      padding: 10px 20px;
-      background-color: #999;
+      padding: 5px 20px;
+      font-size: 0.9em;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
       color: #fff;
-      border-radius: 4px;
+      border-radius: 20px;
       transition: all 0.2s;
       &:hover {
         background-color: #777;
@@ -187,10 +198,15 @@ const HeaderContainer = styled.header`
     }
   }
 
+  /* 태블릿 */
   @media (max-width: ${size.tablet}) {
-    .util { display: none; }
+    .header-inner {
+      border-radius: 0 0 12px 12px;
+      .util { display: none; }
+    }
   }
 
+  /* 모바일 */
   @media (max-width: ${size.mobile}) {
     .header-inner {
       justify-content: space-between;
@@ -222,7 +238,7 @@ const HeaderContainer = styled.header`
         bottom: 0 !important;
         right: 0 !important;
         left: 0 !important;
-        height: 100vh !important;
+        height: 100dvh !important;
         background: #000;
         z-index: 10000;
         padding: 100px 40px;
@@ -287,7 +303,6 @@ function Header() {
     }
   };
 
-  // 모바일 메뉴 열림 시 배경 스크롤 방지
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -343,12 +358,12 @@ function Header() {
               { title: "고객지원", sub: ["주문 현황", "배송 및 반품", "조립 설명서 검색", "문의하기"] },
             ].map((menu, idx) => (
               <li key={idx} className={openSubMenu === idx ? "on" : ""}>
-                <a href="#" onClick={(e) => handleMenuClick(e, idx)}>
+                <GnbLink href="#" onClick={(e) => handleMenuClick(e, idx)}>
                   {menu.title}
-                </a>
+                </GnbLink>
                 <ul className="snb">
                   {menu.sub.map((s) => (
-                    <li key={s}><a href="#">{s}</a></li>
+                    <li key={s}><GnbLink href="#">{s}</GnbLink></li>
                   ))}
                 </ul>
               </li>

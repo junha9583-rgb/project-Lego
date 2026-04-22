@@ -137,7 +137,10 @@ const VisualContainer = styled.figure`
           opacity: 0.9;
         }
       }
-      h2 + p { font-size: 0.98em; }
+      h2 + p {
+        font-size: 0.98em;
+        color: #000;
+      }
       a {
         background-color: #E3000B;
         color: #eee;

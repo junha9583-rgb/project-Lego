@@ -1,15 +1,9 @@
-import { createGlobalStyle, keyframes } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const size = {
   mobile: '768px',
   tablet: '1024px',
 };
-
-const spaceDrift = keyframes`
-  0% { background-position: 48% 48%; background-size: 110%; }
-  50% { background-position: 52% 52%; background-size: 115%; }
-  100% { background-position: 50% 45%; background-size: 110%; }
-`;
 
 export const GlobalStyle = createGlobalStyle`
   /* Reset Style */
@@ -23,8 +17,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     line-height: 1;
     font-size: 20px;
-    background: url(${process.env.PUBLIC_URL}/image/bg.webp);
-    animation: ${spaceDrift} 10s linear infinite alternate;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
   }
 
   ul, ol { list-style: none; }
@@ -36,6 +31,14 @@ export const GlobalStyle = createGlobalStyle`
     height: 1px;
     clip: rect(0 0 0 0);
     overflow: hidden;
+  }
+
+  /* fonts */
+  @font-face {
+    font-family: 'neodgm';
+    src: url('/fonts/neodgm.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
   }
 
   /* Common Style */
