@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -44,7 +45,7 @@ const CustomBtn = styled.div`
     background: #E3000B;
     transform: translateY(-50%) scale(1.1);
     box-shadow: 6px 6px 0px #000;
-    
+
     i {
       color: #fff;
     }
@@ -73,8 +74,7 @@ const neonFlicker = keyframes`
     opacity: 1;
   }
   20%, 22%, 24%, 55% {
-    text-shadow: 
-      2px 2px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
     opacity: 0.3;
   }
 `;
@@ -82,7 +82,7 @@ const neonFlicker = keyframes`
 const FlickerSpan = styled.span`
   display: inline-block;
   animation: ${neonFlicker} 2.5s linear infinite;
-  -webkit-text-stroke: inherit; 
+  -webkit-text-stroke: inherit;
 `;
 
 const SectionWrapper = styled.section`
@@ -110,9 +110,9 @@ const SectionWrapper = styled.section`
       2px 2px 3px rgba(0, 0, 0, 1),
       0 0 5px #000,
       ${props => props.type === 'best'
-    ? `0 0 10px rgba(255, 215, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 160, 0, 0.5), 0 0 40px rgba(255, 160, 0, 0.3)`
-    : `0 0 10px rgba(0, 230, 118, 0.9), 0 0 15px rgba(0, 230, 118, 0.7), 0 0 30px rgba(0, 105, 92, 0.5), 0 0 40px rgba(0, 105, 92, 0.3)`
-  };
+        ? `0 0 10px rgba(255, 215, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 160, 0, 0.5), 0 0 40px rgba(255, 160, 0, 0.3)`
+        : `0 0 10px rgba(0, 230, 118, 0.9), 0 0 15px rgba(0, 230, 118, 0.7), 0 0 30px rgba(0, 105, 92, 0.5), 0 0 40px rgba(0, 105, 92, 0.3)`
+      };
   }
 
   .my-product-swiper {
@@ -153,10 +153,12 @@ const SectionWrapper = styled.section`
       text-overflow: ellipsis;
       margin-top: 30px;
       color: #ddd;
+      
       .price {
         color: #fff;
         margin: 10px 0;
       }
+      
       .badge {
         opacity: 0.7;
         font-size: 0.8em;
@@ -167,6 +169,32 @@ const SectionWrapper = styled.section`
   .pagination-wrapper {
     margin-top: 20px;
     text-align: center;
+  }
+
+  .pagination-wrapper .swiper-pagination-bullet {
+    width: 14px;
+    height: 14px;
+    background: #555;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.3);
+    margin: 0 8px !important;
+  }
+
+  .pagination-wrapper .swiper-pagination-bullet::after {
+    content: '';
+    position: absolute;
+    top: 3.5px;
+    left: 3.5px;
+    width: 7px;
+    height: 7px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+  }
+
+  .pagination-wrapper .swiper-pagination-bullet-active {
+    background: ${props => (props.type === 'best' ? '#FFF176' : '#69F0AE')};
+    box-shadow: 0 0 10px ${props => (props.type === 'best' ? 'rgba(255,241,118,0.6)' : 'rgba(105,240,174,0.6)')};
   }
 
   /* 태블릿 */
@@ -185,7 +213,7 @@ const SectionWrapper = styled.section`
 
     .swiper-slide {
       padding: 30px 20px;
-      
+
       .img-wrap {
         width: 100%;
         max-height: 250px;
@@ -197,7 +225,7 @@ const SectionWrapper = styled.section`
         .price { font-size: 1.1em; }
       }
     }
-    
+
     .my-product-swiper {
       padding: 0 10px !important;
     }
@@ -301,6 +329,7 @@ function ProductSection({ type, title }) {
               </SwiperSlide>
             ))}
           </Swiper>
+
           <CustomBtn className="custom-prev">
             <i className="fa-solid fa-chevron-left"></i>
           </CustomBtn>
@@ -308,6 +337,7 @@ function ProductSection({ type, title }) {
             <i className="fa-solid fa-chevron-right"></i>
           </CustomBtn>
         </div>
+
         <div className={`${type}-pagination pagination-wrapper`}></div>
       </div>
     </SectionWrapper>
